@@ -1,9 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     // Mobile Navigation
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
+    // Burger Menu Toggle
     burger.addEventListener('click', () => {
         // Toggle Navigation
         nav.classList.toggle('active');
@@ -32,13 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Popup Functionality
+    const popupOverlay = document.querySelector('.popup-overlay');
+    const closeButton = document.querySelector('.popup-close');
+
+    function showPopup() {
+        setTimeout(() => {
+            popupOverlay.classList.add('active');
+        }, 1000);
+    }
+
+    function closePopup() {
+        popupOverlay.classList.remove('active');
+    }
+
+    // Close popup when clicking the close button
+    closeButton.addEventListener('click', closePopup);
+
+    // Close popup when clicking outside the image
+    popupOverlay.addEventListener('click', function(e) {
+        if (e.target === popupOverlay) {
+            closePopup();
+        }
+    });
+
+    // Show popup on page load
+    showPopup();
+
     // Form Submission Handler
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Here you would typically handle the form submission
-            // For now, we'll just show an alert
             alert('Thank you for your message! We will get back to you soon.');
             contactForm.reset();
         });
